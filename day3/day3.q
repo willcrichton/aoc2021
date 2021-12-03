@@ -3,11 +3,10 @@ most_common: med each input
 least_common: 1 - most_common
 part1: (2 sv most_common) * (2 sv least_common)
 
-initial: (count input [0]) # 1
-oxygen_search: {x & y = ceiling med y where x}
-co2_search: {x & y <> ceiling med y where x}
-rating: {[search]
+rating: {[cmp]
+  initial: (count input [0]) # 1;
+  search: {[cmp; mask; row] mask & cmp[row; ceiling med row where mask]}[cmp;];
   result: initial search\ input;
   end_index: (sum flip result) ? 1;
   2 sv (flip input) [result[end_index] ? 1]}
-part2: rating[oxygen_search] * rating[co2_search]
+part2: rating[(=)] * rating[(<>)]
