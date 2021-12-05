@@ -5,8 +5,8 @@ n: "i" $ (count cards_input) % 6
 boards: {"I" $ " " vs' cards_input[x + til 5]} each 1 + 6 * til n
 boards: boards {x {x[y]}' where each y}' (boards <> 0n)
 
-set_matches:{any (count each x inter\: y) = 5}
-board_matches:{any set_matches[x; y] | set_matches[flip x; y]}
+set_matches: {any (count each x inter\: y) = 5}
+board_matches: {f: set_matches[;y]; any f[x] or f[flip x]}
 find_matches: {boards board_matches\: x sublist nums}
 rounds: find_matches each til count nums
 
