@@ -9,17 +9,17 @@ I: (til N) cross (til N)
 low_points: I where {all (lookup each neighbors x) > (lookup x)} each I 
 part1: sum 1 + lookup each low_points
 
+flat: {(x[0] * N) + (x[1])}
 single_flow: {
   ns: neighbors x; 
-  low: ns where (lookup each ns) < (lookup x); 
-  $[(count low) = 1; enlist (x; first low); ()]} 
-flows: raze single_flow each I
-flat: {(x[0] * N) + (x[1])}
-edges: (flat'') flows
-bitmask: {(x # 0f) , 1f , (y - x + 1) # 0f}
-N2: N * N
-edges_to_mtx: {[edges]
-  edge_map: edges[;0] ! edges[;1];
-  {[edge_map; n] bitmask[n; N2] | $[edge_map[n] <> 0n; bitmask[edge_map[n]; N2]; N2 # 0]}[edge_map;] each til N2}
-graph: (edges_to_mtx edges) or (edges_to_mtx (reverse each edges))
-/ INCOMPLETE: need to figure out graph reachability in Q
+  low: flat each ns where (lookup each ns) < (lookup x); 
+  $[(lookup x) <> 9; ((flat x) ,/: low); ()]} 
+edges: raze single_flow each I
+
+reachable: {[sets; edge]
+  contains: any each (sets ?\: edge) <> (count each sets);
+  joined: edge union raze sets where contains;
+  remaining: sets where not contains;
+  remaining , (enlist joined)}
+basins: () reachable/ edges
+part2: prd 3 sublist desc count each basins
