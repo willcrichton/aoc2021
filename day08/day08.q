@@ -1,4 +1,4 @@
-input: {" " vs' " | " vs x} each read0 `:./day8/input.txt
+input: {" " vs' " | " vs x} each read0 `:./day08/input.txt
 counts: count each raze input[;1]
 part1: sum raze counts =/: (2; 4; 3; 7) 
 

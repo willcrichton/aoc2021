@@ -1,4 +1,4 @@
-input: flip "I" $'' read0 `:day3/input.txt
+input: flip "I" $'' read0 `:day03/input.txt
 most_common: med each input
 least_common: 1 - most_common
 bin2int: {2 sv x}

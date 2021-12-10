@@ -1,4 +1,4 @@
-input: "I" $ "," vs (read0 `:./day6/input.txt) [0]
+input: "I" $ "," vs (read0 `:./day06/input.txt) [0]
 simulate_one: {$[x = 0; (6; 8); x - 1]}
 simulate_all: {raze simulate_one each x}
 part1: count 80 simulate_all/ input

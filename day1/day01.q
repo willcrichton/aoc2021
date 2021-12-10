@@ -1,4 +1,4 @@
-input: "I" $ (read0 `:day1/input.txt)
+input: "I" $ (read0 `:day01/input.txt)
 
 part1_a1: sum (next input) > input
 

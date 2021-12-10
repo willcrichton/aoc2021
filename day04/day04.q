@@ -1,4 +1,4 @@
-input: read0 `:day4/input.txt
+input: read0 `:day04/input.txt
 nums: "I" $ "," vs input[0]
 cards_input: 1_ input
 n: "i" $ (count cards_input) % 6

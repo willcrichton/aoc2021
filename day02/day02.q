@@ -1,4 +1,4 @@
-input: read0 `:day2/input.txt
+input: read0 `:day02/input.txt
 cs: flip " " vs' input
 cmd: cs[0]
 amt: "I" $ cs[1]
