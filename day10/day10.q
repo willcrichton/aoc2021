@@ -1,14 +1,22 @@
 \P 0
+/ needed or else final answer gets truncated
+
 input: read0 `:./day10/input.txt
 open_to_close: "{([<" ! "})]>"
 close_to_open: "})]>" ! "{([<" 
-scores: ")]}>" ! (3; 57; 1197; 25137);
-check: {[state; char]
-  $[state[1] <> 0; state;  
-    open_to_close[char] <> " "; (state[0] , char; state[1]);
-    close_to_open[char] = (last state[0]); (-1 _ state[0]; state[1]);
-    (state[0]; scores[char] + state[1])]}
-checked: {((); 0) check/ x} each input    
+p1_points: ")]}>" ! (3; 57; 1197; 25137);
+pop: {-1 _ x}
+check: {[state; char] 
+  stack: state[0]; score: state[1];
+  $[score <> 0;                         
+      state;  
+    open_to_close[char] <> " ";         
+      (stack, char; 0);
+    close_to_open[char] = (last stack); 
+      (pop stack; 0);
+    / else
+      (stack; p1_points[char])]}
+checked: check/[((); 0);] each input    
 part1: sum checked[;1]
 
 incomplete: checked where checked[;1] = 0
